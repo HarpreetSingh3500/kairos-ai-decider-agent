@@ -21,3 +21,12 @@ ACTION_QUESTION = {
         "criteria": ACTIONS,
     }
 }
+
+from strands_decider.infer import load_engine
+from strands_decider.schema import SystemOneRequest
+
+engine = load_engine("StrandsAgents/strands-decider-2B-hobson-v19")
+request = SystemOneRequest(state=user_input, questions=ACTION_QUESTION)
+result = engine.evaluate(request)
+decision = result.answers["action"].choice
+confidence = result.answers["action"].confidence
